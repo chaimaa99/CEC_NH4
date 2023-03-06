@@ -119,7 +119,7 @@ def main():
 
             #CEC_collection.insert_many(JDD_46B_Dict)
             return CEC_collection
-
+        
         def recap_46B_MDB():
             # CEC = Extract_46B()
             ca = certifi.where()
@@ -130,7 +130,7 @@ def main():
                 tlsCAFile=ca)
             db = client.CEC
             CEC_collection = db.CEC_collection
-            # Définir les options de retry
+             # Définir les options de retry
             retries = 3
             retry_delay = 1
 
@@ -140,11 +140,8 @@ def main():
             # Tant que la connexion n'est pas établie et qu'il reste des essais
             while not connected and retries > 0:
                 try:
-                    mmydoc = db.CEC_collection.find().sort('_id', -1).limit(37)
-                    last_elt_46B = []
-                    for x in mydoc:
-                        last_elt_46B.append(x)
-                    B46_last_37 = pd.DataFrame(last_elt_46B)
+                    mydoc = db.CEC_collection.find().sort('_id', -1).limit(37)
+                    B46_last_37 = pd.DataFrame(mydoc)
                     B46_last_37 = B46_last_37.drop(['_id'], axis=1)
                     connected = True
                 except AutoReconnect as e:
@@ -152,14 +149,16 @@ def main():
                     print(f"La connexion a échoué. Tentatives restantes : {retries}")
                     time.sleep(retry_delay)
                     retry_delay *= 2
-                
+                    connected = False
+            
             if not connected:
                 # Si la connexion a échoué après plusieurs essais, lever une exception
                 raise Exception("La connexion à la base de données a échoué.")
-                
-            
-            
+        
             return B46_last_37
+
+
+        
 
         def Statistique_46B():
             B46 = recap_46B_MDB()
