@@ -1,4 +1,5 @@
 import pandas as pd
+from pymongo.errors import AutoReconnect
 from datetime import datetime, date
 from datetime import timedelta
 import matplotlib.pyplot as plt
@@ -124,7 +125,7 @@ def main():
             # CEC = Extract_46B()
             ca = certifi.where()
             connect_timeout_ms = 10000
-            autoReconnect= True
+            #autoReconnect= True
             client = MongoClient(
                 "mongodb+srv://team_lotfi:teamLotfi@cluster0.zdz0hto.mongodb.net/?retryWrites=true&w=majority&connectTimeoutMS={}".format(connect_timeout_ms),
                 tlsCAFile=ca)
