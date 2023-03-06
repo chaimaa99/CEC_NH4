@@ -141,7 +141,7 @@ def main():
             while not connected and retries > 0:
                 try:
                     # Tenter la connexion MongoDB
-                    mmydoc = db.CEC_collection.find().sort('_id', -1).limit(37))
+                    mmydoc = db.CEC_collection.find().sort('_id', -1).limit(37)
                     last_elt_46B = []
                     for x in mydoc:
                         last_elt_46B.append(x)
