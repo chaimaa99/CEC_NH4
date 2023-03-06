@@ -149,11 +149,10 @@ def main():
                     B46_last_37 = B46_last_37.drop(['_id'], axis=1)
                     connected = True
                except AutoReconnect as e:
-                # Si la connexion a échoué, réessayer après un délai
-                retries -= 1
-                print(f"La connexion a échoué. Tentatives restantes : {retries}")
-                time.sleep(retry_delay)
-                retry_delay *= 2
+                    retries -= 1
+                    print(f"La connexion a échoué. Tentatives restantes : {retries}")
+                    time.sleep(retry_delay)
+                    retry_delay *= 2
             if not connected:
                 # Si la connexion a échoué après plusieurs essais, lever une exception
                 raise Exception("La connexion à la base de données a échoué.")
