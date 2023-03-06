@@ -124,8 +124,8 @@ def main():
             # CEC = Extract_46B()
             ca = certifi.where()
             connect_timeout_ms = 10000
-            client = MongoClient(
-                "mongodb+srv://team_lotfi:teamLotfi@cluster0.zdz0hto.mongodb.net/?retryWrites=true&w=majority&connectTimeoutMS={}".format(connect_timeout_ms)",
+           client = MongoClient(
+                "mongodb+srv://team_lotfi:teamLotfi@cluster0.zdz0hto.mongodb.net/?retryWrites=true&w=majority&connectTimeoutMS={}".format(connect_timeout_ms),
                 tlsCAFile=ca)
             db = client.CEC
             CEC_collection = db.CEC_collection
