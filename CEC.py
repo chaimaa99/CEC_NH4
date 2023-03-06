@@ -130,12 +130,36 @@ def main():
                 tlsCAFile=ca)
             db = client.CEC
             CEC_collection = db.CEC_collection
-            last_elt_46B = []
-            mydoc = db.CEC_collection.find().sort('_id', -1).limit(37)
-            for x in mydoc:
-                last_elt_46B.append(x)
-            B46_last_37 = pd.DataFrame(last_elt_46B)
-            B46_last_37 = B46_last_37.drop(['_id'], axis=1)
+            # Définir les options de retry
+            retries = 3
+            retry_delay = 1
+
+            # Définir une variable de contrôle pour savoir si la connexion a été établie
+            connected = False
+
+            # Tant que la connexion n'est pas établie et qu'il reste des essais
+            while not connected and retries > 0:
+                try:
+                    # Tenter la connexion MongoDB
+                    mmydoc = db.CEC_collection.find().sort('_id', -1).limit(37))
+                    last_elt_46B = []
+                    for x in mydoc:
+                        last_elt_46B.append(x)
+                    B46_last_37 = pd.DataFrame(last_elt_46B)
+                    B46_last_37 = B46_last_37.drop(['_id'], axis=1)
+                    connected = True
+               except AutoReconnect as e:
+                # Si la connexion a échoué, réessayer après un délai
+                retries -= 1
+                print(f"La connexion a échoué. Tentatives restantes : {retries}")
+                time.sleep(retry_delay)
+                retry_delay *= 2
+            if not connected:
+                # Si la connexion a échoué après plusieurs essais, lever une exception
+                raise Exception("La connexion à la base de données a échoué.")
+                
+            
+            
             return B46_last_37
 
         def Statistique_46B():
