@@ -123,10 +123,9 @@ def main():
             return CEC_collection
         
         def recap_46B_MDB():
-            try:
-                # CEC = Extract_46B()
+            # CEC = Extract_46B()
                 ca = certifi.where()
-                connect_timeout_ms = 10000000
+                connect_timeout_ms = 30000
                 client = MongoClient(
                     "mongodb+srv://team_lotfi:teamLotfi@cluster0.zdz0hto.mongodb.net/?retryWrites=true&w=majority&connectTimeoutMS={}".format(connect_timeout_ms),
                     tlsCAFile=ca)
@@ -140,12 +139,6 @@ def main():
                 B46_last_37 = B46_last_37.drop(['_id'], axis=1)
 
                 return B46_last_37
-            except Exception as e:
-                print("Erreur lors de la connexion à la base de données : ", str(e))
-                return None
-        
-
-
         
 
         def Statistique_46B():
