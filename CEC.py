@@ -135,7 +135,7 @@ def main():
             mydoc = db.CEC_collection.find().sort('_id', -1).limit(37)
             for x in mydoc:
                 last_elt_46B.append(x
-            B46_last_37 = pd.DataFrame(mydoc)
+            B46_last_37 = pd.DataFrame(last_elt_46B)
             B46_last_37 = B46_last_37.drop(['_id'], axis=1)
 
             return B46_last_37
