@@ -140,7 +140,6 @@ def main():
             # Tant que la connexion n'est pas établie et qu'il reste des essais
             while not connected and retries > 0:
                 try:
-                    # Tenter la connexion MongoDB
                     mmydoc = db.CEC_collection.find().sort('_id', -1).limit(37)
                     last_elt_46B = []
                     for x in mydoc:
@@ -148,11 +147,12 @@ def main():
                     B46_last_37 = pd.DataFrame(last_elt_46B)
                     B46_last_37 = B46_last_37.drop(['_id'], axis=1)
                     connected = True
-               except AutoReconnect as e:
+                except AutoReconnect as e:
                     retries -= 1
                     print(f"La connexion a échoué. Tentatives restantes : {retries}")
                     time.sleep(retry_delay)
                     retry_delay *= 2
+                
             if not connected:
                 # Si la connexion a échoué après plusieurs essais, lever une exception
                 raise Exception("La connexion à la base de données a échoué.")
