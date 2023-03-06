@@ -1,5 +1,6 @@
 import pandas as pd
 from pymongo.errors import AutoReconnect
+import time
 from datetime import datetime, date
 from datetime import timedelta
 import matplotlib.pyplot as plt
