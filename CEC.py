@@ -108,7 +108,7 @@ def main():
 
             ca = certifi.where()
             client = MongoClient(
-                "mongodb+srv://team_lotfi:teamLotfi@cluster0.zdz0hto.mongodb.net/?retryWrites=true&w=majority&connectTimeoutMS={}".format(connect_timeout_ms),
+                "mongodb+srv://team_lotfi:teamLotfi@cluster0.zdz0hto.mongodb.net/?retryWrites=true&w=majority,
                 tlsCAFile=ca)
             db = client.CEC  # use or create a database named db
             CEC_collection = db.CEC_collection  # use or create a collection named JDD46B_collection
@@ -124,7 +124,8 @@ def main():
             # CEC = Extract_46B()
             ca = certifi.where()
             connect_timeout_ms = 10000
-           client = MongoClient(
+            
+            client = MongoClient(
                 "mongodb+srv://team_lotfi:teamLotfi@cluster0.zdz0hto.mongodb.net/?retryWrites=true&w=majority&connectTimeoutMS={}".format(connect_timeout_ms),
                 tlsCAFile=ca)
             db = client.CEC
